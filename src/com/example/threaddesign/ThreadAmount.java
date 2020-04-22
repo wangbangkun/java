@@ -38,7 +38,7 @@ public class ThreadAmount
 					LOCK.addLast(new Object());
 				}
 				
-				System.out.println(name + " start");
+				System.out.println(name + " start"); 
 				
 				task.run();
 				
@@ -66,11 +66,17 @@ public class ThreadAmount
 							e.printStackTrace();
 						}
 					});
+					t.start();
 					list.add(t);
 				}
 		);
 		list.stream().forEach(t -> {
-			t.start();
+			try {
+				t.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		});
 	}
 }
